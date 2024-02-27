@@ -85,7 +85,6 @@
 
 // export default Task;
 
-
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -102,23 +101,10 @@ import { IconButton } from "@mui/material";
 interface TaskProps {
   tasks: TaskType[];
   onEditClick: (index: number) => void;
+  onDeleteClick: (index: number) => void;
 }
 
-const Task: React.FC<TaskProps> = ({ tasks, onEditClick }) => {
-
-  const handleEdit = (index: number) => {
-    const taskToEdit = tasks[index];
-    console.log("Editing task:", taskToEdit);
-  };
-
-  const handleDelete = (index: number) => {
-    const handleDelete = (index: number) => {
-        const updatedTasks = [...tasks];
-        updatedTasks.splice(index, 1);
-        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      };
-    }
-
+const Task: React.FC<TaskProps> = ({ tasks, onEditClick, onDeleteClick }) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -161,7 +147,7 @@ const Task: React.FC<TaskProps> = ({ tasks, onEditClick }) => {
                 <IconButton onClick={() => onEditClick(index)}>
                   <EditIcon />
                 </IconButton>
-                <IconButton onClick={() => handleDelete(index)}>
+                <IconButton onClick={() => onDeleteClick(index)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
